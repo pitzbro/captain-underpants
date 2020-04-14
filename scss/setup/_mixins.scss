@@ -70,6 +70,12 @@
 
 // Border Mixins
 
+@mixin crayon-border {
+  border: 30px solid;
+  border-image-source: url(/img/crayon-border.png);
+  border-image-slice: 140;
+}
+
 @mixin dashed-border($dashlength, $spacelength, $borderwidth, $color, $position: bottom, $direction: start) {
   position: relative;
   padding: $borderwidth * 2 0;

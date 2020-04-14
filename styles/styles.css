@@ -1,38 +1,49 @@
 /* Breakpoint mixins */
 /* Media  Mixins */
 @font-face {
-  font-weight: 200;
-  font-display: fallback;
-  src: url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewLight.woff2") format("woff2"), url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewLight.woff") format("woff");
-  font-family: "Open Sans Hebrew"; }
+  font-family: "cabin";
+  src: url("/fonts/cabin/CabinSketch-Regular.ttf"); }
 
 @font-face {
-  font-weight: 400;
-  font-display: fallback;
-  src: url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewRegular.woff2") format("woff2"), url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewRegular.woff") format("woff");
-  font-family: "Open Sans Hebrew"; }
+  font-family: "dk";
+  src: url("/fonts/dk/dk.ttf"); }
 
 @font-face {
-  font-weight: 700;
-  font-display: fallback;
-  src: url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewBold.woff2") format("woff2"), url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewBold.woff") format("woff");
-  font-family: "Open Sans Hebrew"; }
+  font-family: "eraser";
+  src: url("/fonts/eraser/EraserRegular.ttf"); }
+
+@font-face {
+  font-family: "pastel";
+  src: url("/fonts/pastel/pastel.woff"); }
 
 body {
   display: grid;
+  gap: 10px;
   grid-template-columns: minmax(1.6rem, auto) minmax(auto, 1200px) minmax(1.6rem, auto);
   min-height: 100vh;
   grid-template-rows: 1fr 60px auto 1fr; }
   body .game {
     grid-column: 2;
     grid-row: 3;
-    background-color: lightblue;
-    position: relative; }
+    background-color: #C5E4FF;
+    position: relative;
+    border: 30px solid;
+    border-image-source: url(/img/crayon-border.png);
+    border-image-slice: 140; }
   body .game-info {
     grid-column: 2;
     grid-row: 2;
     align-items: center;
-    display: flex; }
+    display: flex;
+    font-size: 30px;
+    text-transform: uppercase;
+    border: 30px solid;
+    border-image-source: url(/img/crayon-border.png);
+    border-image-slice: 140; }
+
+html {
+  font-family: pastel;
+  color: #333; }
 
 body {
   margin: 0; }

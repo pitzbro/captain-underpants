@@ -1,6 +1,7 @@
 body {
     display: grid;
-
+    
+    gap: 10px;
     grid-template-columns: 
         minmax(1.6rem, auto)
         minmax(auto, 1200px)
@@ -11,8 +12,9 @@ body {
         .game {
             grid-column: 2;
             grid-row: 3;
-            background-color: lightblue;
+            background-color: $clr3;
             position: relative;
+            @include crayon-border;
         }
         
         .game-info {
@@ -20,5 +22,8 @@ body {
             grid-row: 2;
             align-items: center;
             display: flex;
+            font-size: 30px;
+            text-transform: uppercase;
+            @include crayon-border;
           }
 }
