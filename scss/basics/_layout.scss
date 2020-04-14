@@ -24,6 +24,13 @@ body {
             display: flex;
             font-size: 30px;
             text-transform: uppercase;
+            justify-content: flex-end;
+            color: $clr4;
             @include crayon-border;
+
+            .score {
+                font-size: 1.3em;
+                color: $clr1;
+            }
           }
 }

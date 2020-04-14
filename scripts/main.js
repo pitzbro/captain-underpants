@@ -74,6 +74,7 @@
         }
         function punch() {
             captain.classList.add('punch');
+            playSound('swish1');
             setTimeout(() => {
                 captain.classList.remove('punch');
             }, 200);
@@ -149,8 +150,9 @@
             enemy.remove();
         }
         function destroyEnemy(enemy) {
-            console.log('BOOM!')
-            enemy.remove();
+            enemy.classList.add('boom');
+            playSound(`pam${randomIntFromInterval(1, 4)}`)
+            setTimeout(() => enemy.remove(), 200);
         }
 
 
