@@ -1,18 +1,20 @@
 (function () {
 
+    const
+        game = document.querySelector('.game'),
+        scoreEl = document.querySelector('.score-board .score'),
+        captain = document.querySelector('.captain');
+
+    var 
+        captainPosTop = 0,
+        captainSpeed = 20,
+        enemyId = 0,
+        level = 1;
+        levelArr = [];
+        score = 0;
 
     function initGame() {
 
-        const
-            game = document.querySelector('.game'),
-            scoreEl = document.querySelector('.score-board .score'),
-            captain = document.querySelector('.captain');
-
-        var 
-            captainPosTop = 0,
-            captainSpeed = 20,
-            enemyId = 0,
-            score = 0;
         //Initialise game
         // facing = "E"; //N = North, E = East, S = South, W = West
         // isMoving = false;
@@ -36,7 +38,7 @@
                     break;
                 case ' ': punch()
                     break;
-                case 'C': createEnemy()
+                case 'C': createEnemy('asteroid')
                     break;
                 default:
                 // code block
@@ -90,16 +92,21 @@
                 height: 12,
                 points: 100
             },
-            // 'yossef': {
-            //     width: 8,
-            //     height: 8,
-            // }
+            'underpants': {
+                type: 'underpants',               
+                width: 10,
+                height: 10,
+                points: 200
+            }
         }
-        createEnemy();
+        // createEnemy();
         function createEnemy(enemy) {
             enemyId++;
-            var enemyNumber = randomIntFromInterval(0, Object.keys(enemies).length - 1);
-            var enemy = Object.entries(enemies)[enemyNumber][1];
+            // var enemyNumber = randomIntFromInterval(0, Object.keys(enemies).length - 1);
+            // var enemy = Object.entries(enemies)[enemyNumber][1];
+            console.log('before', enemy)
+            var enemy = enemies[enemy];
+            console.log(enemy)
             var enemyYPos = randomIntFromInterval(0, 100 - enemy.height);
             var enemyEl = document.createElement('enemy');
             enemyEl.className = `enemy-${enemyId} ${enemy.type}`;
@@ -117,7 +124,7 @@
             var enemyYPos = Number(enemy.style.top.replace('%', ''));
             var enemyData = enemies[enemy.dataset.type];
 
-            console.log(enemyData)
+            // console.log(enemyData)
 
             var movingEnemy =  setInterval(()=> {
                 enemyXPos++
@@ -157,14 +164,43 @@
 
 
         // ---------- SCORE -------------- //
-
+        
         function updateScore(points) {
             score = score + points;
             console.log('points', points)
             scoreEl.innerText = score;
         }
+        
+        // ---------- LEVEL -------------- //
 
+        initLevel()
+        function initLevel() {
+
+
+            // Object.entries(levels[level - 1]).forEach((entrie, idx) => {
+            //     var type = entrie[0];
+            //     var number = entrie[1];
+            //     if (type !== 'level') {
+            //         for (var i = 0; i < number; i++) {
+            //           setTimeout(createEnemy(), randomIntFromInterval(0, 60000));
+            //         // createFutureEnemy();
+            //         }
+            //     }
+            // })
+            for (var i = 0; i < levels[level - 1].asteroids; i++) {
+                enemyDelay('asteroid')
+            }
+            for (var i = 0; i < levels[level - 1].underpants; i++) {
+                enemyDelay('underpants')
+            }
+            
+            function enemyDelay(type) {
+                setTimeout( createEnemy.bind(null, type), randomIntFromInterval(0, 60000));
+            }
+        }
     }
+
+
 
 
 

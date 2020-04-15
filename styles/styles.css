@@ -89,5 +89,9 @@ enemy {
     width: 12%;
     height: 12%;
     background-image: url(/img/asteroid.png); }
+  enemy.underpants {
+    width: 10%;
+    height: 10%;
+    background-image: url(/img/underpants.png); }
   enemy.boom {
     background-image: url(/img/boom.png); }

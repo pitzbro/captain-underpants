@@ -15,6 +15,13 @@ enemy {
     height: 12%;
     background-image: url(/img/asteroid.png);
   }
+
+  &.underpants {
+    width: 10%;
+    height: 10%;
+    background-image: url(/img/underpants.png);
+  }
+
   &.boom {
     background-image: url(/img/boom.png);
   }
