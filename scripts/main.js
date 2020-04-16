@@ -1,21 +1,38 @@
 (function () {
 
-    var 
-        captainPosTop = 0,
+    const
+        stopWatch = document.querySelector('.stop-watch'),
+        btnStart = document.querySelector('.btn-start');
+
+    let captainPosTop = 0,
         captainSpeed = 20,
         enemyId = 0,
         level = 1,
         score = 0,
-        time = 0;
-        
-        function initGame() {
-            
+        time = 0,
+        seconds = 0,
+        minutes = 0,
+        t = null,
+        goingDown = null,
+        goingUp = null,
+        movingDirection = 'center';
+
+
+    function initApp() {
+        // Buttons
+        btnStart.onmousedown = () => initGame();
+    }
+
+    function initGame() {
+
+        document.body.classList.add('game-on');
+
         const
-        game = document.querySelector('.game'),
-        scoreEl = document.querySelector('.score-board .score'),
-        captain = document.querySelector('.captain'),
-        btnRestart = document.querySelector('.restart-game'),
-        levelTime = 30000;
+            game = document.querySelector('.game'),
+            gameContainer = document.querySelector('.game-container'),
+            scoreEl = document.querySelector('.score-board .score'),
+            captain = document.querySelector('.captain'),
+            levelTime = 30000;
         // levelTime = 5000;
 
         //------------
@@ -39,31 +56,24 @@
             }
         }
 
-        // Buttons
 
-        btnRestart.onclick = () => restartGame();
 
         // Game States
 
         function gameEnd() {
             console.log('game end')
-        }
-
-        function restartGame() {
-            resetTimer();
+            document.querySelector('.your-score').innerText = score;
+            document.body.classList.remove('game-on');
+            gameContainer.setAttribute('data-mode', 'end');
         }
 
         // Movement
-
-        var movingDirection = 'center'
-        var goingDown = null;
-        var goingUp = null;
 
         function moveDown() {
             captainPosTop++
             if (captainPosTop <= 85) captain.style.top = captainPosTop + '%';
             else clearInterval(goingDown)
-            
+
         }
         function moveUp() {
             captainPosTop--
@@ -96,13 +106,13 @@
 
         const enemies = {
             'asteroid': {
-                type: 'asteroid',               
+                type: 'asteroid',
                 width: 12,
                 height: 12,
                 points: 100
             },
             'underpants': {
-                type: 'underpants',               
+                type: 'underpants',
                 width: 10,
                 height: 10,
                 points: 200
@@ -128,17 +138,17 @@
             var enemyYPos = Number(enemy.style.top.replace('%', ''));
             var enemyData = enemies[enemy.dataset.type];
 
-            var movingEnemy =  setInterval(()=> {
+            var movingEnemy = setInterval(() => {
                 enemyXPos++
                 if (enemyXPos > 150) {
                     removeEnemy(enemy)
                     clearInterval(movingEnemy)
                 }
-                if (enemyXPos > 70 && 
-                    enemyXPos < 80 && 
-                    enemyYPos >= captainPosTop && 
-                    enemyYPos <= captainPosTop + 15 && 
-                    captain.classList.contains('punch') ) {
+                if (enemyXPos > 70 &&
+                    enemyXPos < 80 &&
+                    enemyYPos >= captainPosTop &&
+                    enemyYPos <= captainPosTop + 15 &&
+                    captain.classList.contains('punch')) {
                     updateScore(enemyData.points)
                     destroyEnemy(enemy)
                     clearInterval(movingEnemy)
@@ -148,7 +158,7 @@
                 enemy.style.right = enemyXPos + '%';
 
             }, randomIntFromInterval(16, 30))
-            
+
             // temp
             // enemy.style.right = '50%';
 
@@ -165,12 +175,12 @@
 
 
         // ---------- SCORE -------------- //
-        
+
         function updateScore(points) {
             score = score + points;
             scoreEl.innerText = score;
         }
-        
+
         // ---------- LEVEL -------------- //
 
         const levelEl = document.querySelector('.level-info .level')
@@ -179,14 +189,12 @@
 
         function updateLevel() {
 
-            console.log('updating level', levels[level - 1])
-
             if (!levels[level - 1]) {
                 gameEnd();
                 return
             }
 
-            game.setAttribute('data-mode', levels[level - 1].mode);
+            gameContainer.setAttribute('data-mode', levels[level - 1].mode);
 
             levelEl.innerText = level;
 
@@ -195,25 +203,26 @@
                 var number = entrie[1];
                 if (type !== 'level') {
                     for (var i = 0; i < number; i++) {
-                      enemyDelay(type)
+                        enemyDelay(type)
                     }
                 }
             })
-            
+
             function enemyDelay(type) {
-                setTimeout( createEnemy.bind(null, type), randomIntFromInterval(1000, levelTime));
+                setTimeout(createEnemy.bind(null, type), randomIntFromInterval(1000, levelTime));
             }
         }
 
         // Timer
 
-        const stopWatch = document.querySelector('.stop-watch');
 
-        var seconds = 0, minutes = 0, t;
+
+
 
         function resetTimer() {
             seconds = 0;
             minutes = 0;
+            time = 0;
             stopWatch.textContent = '00:00';
             clearInterval(t);
         }
@@ -229,9 +238,9 @@
                 seconds = 0;
                 minutes++;
             }
-            
+
             stopWatch.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
-        
+
             startTimer();
         }
 
@@ -243,7 +252,7 @@
     }
 
     window.addEventListener('DOMContentLoaded', event => {
-        initGame()
+        initApp()
     });
 
 })()

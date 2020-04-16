@@ -18,11 +18,11 @@
 
 body {
   display: grid;
-  gap: 10px;
+  gap: 4px;
   grid-template-columns: minmax(1.6rem, auto) minmax(auto, 1200px) minmax(1.6rem, auto);
   min-height: 100vh;
   grid-template-rows: 1fr 60px auto 60px 1fr; }
-  body .game {
+  body .game-container {
     grid-column: 2;
     grid-row: 3;
     position: relative;
@@ -30,10 +30,41 @@ body {
     border-image-source: url(/img/crayon-border.png);
     border-image-slice: 140;
     transition: background-color .8s; }
-    body .game[data-mode='day'] {
-      background-color: #bee1ff; }
-    body .game[data-mode='space'] {
+    body .game-container[data-mode='day'] {
+      background-color: #b0bfe0; }
+    body .game-container[data-mode='space'] {
       background-color: #293540; }
+    body .game-container[data-mode='end'] {
+      background-color: #293540; }
+    body .game-container[data-mode='start'] {
+      background-color: #b0bfe0; }
+      body .game-container[data-mode='start'] .game {
+        transform: translateY(-100%); }
+      body .game-container[data-mode='start'] .game-start {
+        transform: translateY(0); }
+    body .game-container[data-mode='end'] {
+      background-color: #19243a; }
+      body .game-container[data-mode='end'] .game {
+        transform: translateY(-100%); }
+      body .game-container[data-mode='end'] .game-end {
+        transform: translateY(0); }
+    body .game-container > * {
+      transition: transform .8s;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end; }
+  body .game-start {
+    background-image: url(/img/happy-captain.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 16%;
+    transform: translateY(100%); }
+  body .game-end {
+    background-image: url(/img/happy-captain.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 16%;
+    transform: translateY(100%); }
   body .game-info {
     grid-column: 2;
     grid-row: 2;
@@ -42,10 +73,14 @@ body {
     font-size: 30px;
     text-transform: uppercase;
     justify-content: space-between;
+    background-color: #fff;
     color: #916ab9;
     border: 30px solid;
     border-image-source: url(/img/crayon-border.png);
-    border-image-slice: 140; }
+    border-image-slice: 140;
+    transition: all .8s;
+    transform: translateY(-100%);
+    opacity: 0; }
     body .game-info .stop-watch {
       border: 20px solid;
       border-image-source: url(/img/crayon-border.png);
@@ -57,9 +92,9 @@ body {
       position: relative;
       bottom: 0px;
       z-index: 1; }
-    body .game-info .score {
-      font-size: 1.3em;
-      color: #d11e2b; }
+  body.game-on .game-info {
+    transform: translateY(0);
+    opacity: 1; }
   body .game-actions {
     grid-column: 2;
     grid-row: 4;
@@ -71,20 +106,22 @@ html {
   color: #293540; }
 
 body {
-  margin: 0; }
+  margin: 0;
+  background-color: #d2ccd2; }
 
 button {
   border: 20px solid;
   border-image-source: url(/img/crayon-border.png);
   border-image-slice: 240;
-  background: #916ab9;
+  background-color: #916ab9;
   text-transform: uppercase;
   font-family: pastel;
   color: #fff;
   font-size: 16px;
+  transition: background-color .3s;
   cursor: pointer; }
   button:hover {
-    background: #d11e2b; }
+    background-color: #5e3c81; }
 
 .aspect-16-9 {
   position: relative;
@@ -94,9 +131,37 @@ button {
     content: "";
     width: 100%;
     padding-top: 56.25%; }
+  .aspect-16-9 > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; }
   .aspect-16-9 > img {
     height: 100%;
     object-fit: cover; }
+
+.message {
+  border: 30px solid;
+  border-image-source: url(/img/crayon-border-white.png);
+  border-image-slice: 140;
+  color: #916ab9;
+  font-size: 24px;
+  position: relative; }
+  .message::before {
+    content: "";
+    display: block;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; }
+
+.score {
+  font-size: 1.3em;
+  color: #d11e2b; }
 
 .captain {
   position: absolute;

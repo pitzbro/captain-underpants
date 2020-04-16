@@ -6,21 +6,28 @@ html {
 
 body {
     margin: 0;
+    background-color: $clr6;
+}
+
+h2 {
+    // color: $clr2;
 }
 
 button {
     border: 20px solid;
     border-image-source: url(/img/crayon-border.png);
     border-image-slice: 240;
-    background: $clr4;
+    background-color: $clr4;
     text-transform: uppercase;
     font-family: pastel;
     color: #fff;
     font-size: 16px;
 
+    transition: background-color .3s;
+
     cursor: pointer;
 
     &:hover {
-        background: $clr1;
+        background-color: darken($clr4, 20%);
     }
 }

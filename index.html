@@ -13,14 +13,40 @@
         <div class="stop-watch"><time>00:00</time></div>
         <div class="score-board">Score: <span class="score">0</span></div>
     </section>
-    
-    <section class="game aspect-16-9">
-        <captain class="captain"></captain>
+
+    <section data-mode="start" class="game-container aspect-16-9">
+        <section class="game">
+            <captain class="captain"></captain>
+        </section>
+        <section class="game-start">
+            <div class="message">
+                <h2>Captain Underpants Game</h2>
+                    <p>
+                        Bash those asteroids!
+                    </p> 
+                <button class="btn-start">Start</button>
+            </div>
+        </section>
+        <section class="game-end">
+            <div class="message">
+                <h2>The END</h2>
+                <div class="score-info">
+                    <div class="best-score">
+                        <h3 class="best-score">Congratulations!</h3>
+                        you have made a new best score :)
+                    </div>
+                    <p>
+                        Your score: <span class="your-score score">1999</span>
+                    </p> 
+                </div>
+                <button class="btn-start" onclick="window.location.reload();">Try again</button>
+            </div>
+        </section>
     </section>
     
-    <section class="game-actions">
-        <button class="restart-game">Restart</button>
-    </section>
+    <!-- <section class="game-actions">
+        <button class="btn-restart" onclick="window.location.reload();">Restart</button>
+    </section> -->
 
     <script src="/scripts/sounds.js"></script>
     <script src="/scripts/helpers.js"></script>

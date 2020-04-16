@@ -1,64 +1,122 @@
 body {
     display: grid;
     
-    gap: 10px;
+    gap: 4px;
     grid-template-columns: 
         minmax(1.6rem, auto)
         minmax(auto, 1200px)
         minmax(1.6rem, auto);
         min-height: 100vh;
         grid-template-rows: 1fr 60px auto 60px 1fr;
-        
-        .game {
-            grid-column: 2;
-            grid-row: 3;
-            position: relative;
-            @include crayon-border;
 
-            transition: background-color .8s;
+    .game-container {
+        grid-column: 2;
+        grid-row: 3;
+        position: relative;
+        @include crayon-border;
+
+        transition: background-color .8s;
+        
+        &[data-mode='day'] {
+            background-color: $clr3;
+        }
+        &[data-mode='space'] {
+            background-color: $clr2;
+        }
+        &[data-mode='end'] {
+            background-color: $clr2;
+        }
+        &[data-mode='start'] {
+            background-color: $clr5;
+
+            .game {
+                transform: translateY(-100%);
+            }
+
+            .game-start {
+                transform: translateY(0);
+            }
             
-            &[data-mode='day'] {
-                background-color: $clr3;
-            }
-            &[data-mode='space'] {
-                background-color: $clr2;
-            }
         }
         
-        .game-info {
-            grid-column: 2;
-            grid-row: 2;
-            align-items: center;
-            display: flex;
-            font-size: 30px;
-            text-transform: uppercase;
-            justify-content: space-between;
-            color: $clr4;
-            @include crayon-border;
-
-            .stop-watch {
-                border: 20px solid;
-                border-image-source: url(/img/crayon-border.png);
-                border-image-slice: 240;
-                background: white;
-                font-size: 44px;
-                width: 130px;
-                text-align: center;
-                position: relative;
-                bottom: 0px;
-                z-index: 1;
+        &[data-mode='end'] {
+            background-color: $clr7;
+            
+            .game {
+                transform: translateY(-100%);
             }
-
-            .score {
-                font-size: 1.3em;
-                color: $clr1;
+            
+            .game-end {
+                transform: translateY(0);
             }
         }
 
-        .game-actions {
-            grid-column: 2;
-            grid-row: 4;
+        > * {
+            transition: transform .8s;
             display: flex;
+            align-items: flex-start;
             justify-content: flex-end;
         }
+    }
+
+    .game-start {
+        background-image: url(/img/happy-captain.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: 16%;
+        transform: translateY(100%);
+    }
+
+    .game-end {
+        background-image: url(/img/happy-captain.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: 16%;
+        transform: translateY(100%);
+    }
+    
+    .game-info {
+        grid-column: 2;
+        grid-row: 2;
+        align-items: center;
+        display: flex;
+        font-size: 30px;
+        text-transform: uppercase;
+        justify-content: space-between;
+        background-color: #fff;
+        color: $clr4;
+        @include crayon-border;
+
+        transition: all .8s;
+
+        transform: translateY(-100%);
+        opacity: 0;
+
+        .stop-watch {
+            border: 20px solid;
+            border-image-source: url(/img/crayon-border.png);
+            border-image-slice: 240;
+            background: white;
+            font-size: 44px;
+            width: 130px;
+            text-align: center;
+            position: relative;
+            bottom: 0px;
+            z-index: 1;
+        }
+    }
+
+    &.game-on {
+        .game-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .game-actions {
+        grid-column: 2;
+        grid-row: 4;
+        display: flex;
+        justify-content: flex-end;
+    }
 }
