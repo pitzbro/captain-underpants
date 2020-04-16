@@ -21,15 +21,19 @@ body {
   gap: 10px;
   grid-template-columns: minmax(1.6rem, auto) minmax(auto, 1200px) minmax(1.6rem, auto);
   min-height: 100vh;
-  grid-template-rows: 1fr 60px auto 1fr; }
+  grid-template-rows: 1fr 60px auto 60px 1fr; }
   body .game {
     grid-column: 2;
     grid-row: 3;
-    background-color: #bee1ff;
     position: relative;
     border: 30px solid;
     border-image-source: url(/img/crayon-border.png);
-    border-image-slice: 140; }
+    border-image-slice: 140;
+    transition: background-color .8s; }
+    body .game[data-mode='day'] {
+      background-color: #bee1ff; }
+    body .game[data-mode='space'] {
+      background-color: #293540; }
   body .game-info {
     grid-column: 2;
     grid-row: 2;
@@ -37,14 +41,30 @@ body {
     display: flex;
     font-size: 30px;
     text-transform: uppercase;
-    justify-content: flex-end;
+    justify-content: space-between;
     color: #916ab9;
     border: 30px solid;
     border-image-source: url(/img/crayon-border.png);
     border-image-slice: 140; }
+    body .game-info .stop-watch {
+      border: 20px solid;
+      border-image-source: url(/img/crayon-border.png);
+      border-image-slice: 240;
+      background: white;
+      font-size: 44px;
+      width: 130px;
+      text-align: center;
+      position: relative;
+      bottom: 0px;
+      z-index: 1; }
     body .game-info .score {
       font-size: 1.3em;
       color: #d11e2b; }
+  body .game-actions {
+    grid-column: 2;
+    grid-row: 4;
+    display: flex;
+    justify-content: flex-end; }
 
 html {
   font-family: pastel;
@@ -52,6 +72,19 @@ html {
 
 body {
   margin: 0; }
+
+button {
+  border: 20px solid;
+  border-image-source: url(/img/crayon-border.png);
+  border-image-slice: 240;
+  background: #916ab9;
+  text-transform: uppercase;
+  font-family: pastel;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer; }
+  button:hover {
+    background: #d11e2b; }
 
 .aspect-16-9 {
   position: relative;
