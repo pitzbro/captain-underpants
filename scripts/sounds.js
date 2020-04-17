@@ -1,26 +1,26 @@
 var sounds = {
     'swish1' : {
-      url : '/sounds/swish1.mp3',
+      url : './sounds/swish1.mp3',
       volume : .4
     },
     'swish2' : {
-      url : '/sounds/swish2.mp3',
+      url : './sounds/swish2.mp3',
       volume : .6
     },
     'pam1' : {
-      url : '/sounds/pam.mp3',
+      url : './sounds/pam.mp3',
       volume : .6
     },
     'pam2' : {
-      url : '/sounds/boing.mp3',
+      url : './sounds/boing.mp3',
       volume : .6
     },
     'pam3' : {
-      url : '/sounds/doing.mp3',
+      url : './sounds/doing.mp3',
       volume : .8
     },
     'pam4' : {
-      url : '/sounds/bong.mp3',
+      url : './sounds/bong.mp3',
       volume : .6
     }
   };

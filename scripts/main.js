@@ -3,9 +3,11 @@
     const
         stopWatch = document.querySelector('.stop-watch'),
         btnStart = document.querySelector('.btn-start');
+        bestScoreEl = document.querySelector('.game-actions .best-score');
 
     let captainPosTop = 0,
         captainSpeed = 20,
+        enemySpeedRange = [16, 30],
         enemyId = 0,
         level = 1,
         score = 0,
@@ -15,12 +17,20 @@
         t = null,
         goingDown = null,
         goingUp = null,
-        movingDirection = 'center';
+        movingDirection = 'center',
+        bestScore = localStorage.getItem('bestScore') ? localStorage.getItem('bestScore') : 0;
 
 
     function initApp() {
         // Buttons
         btnStart.onmousedown = () => initGame();
+        bestScoreEl.innerText = bestScore;
+    }
+
+    function setBestScore(score) {
+        bestScore = score;
+        bestScoreEl.innerText = bestScore;
+        localStorage.setItem('bestScore', score)
     }
 
     function initGame() {
@@ -61,7 +71,15 @@
         // Game States
 
         function gameEnd() {
-            console.log('game end')
+            resetTimer();
+            if (score > bestScore) {
+                setBestScore(score);
+                document.querySelector('.not-best-score').style.display = 'none';
+                document.querySelector('.score-info .best-score').style.display = 'block';
+            } else {
+                document.querySelector('.not-best-score').style.display = 'block';
+                document.querySelector('.score-info .best-score').style.display = 'none';
+            }
             document.querySelector('.your-score').innerText = score;
             document.body.classList.remove('game-on');
             gameContainer.setAttribute('data-mode', 'end');
@@ -115,17 +133,56 @@
                 type: 'underpants',
                 width: 10,
                 height: 10,
-                points: 200
+                points: 300
+            },
+            'house': {
+                type: 'house',
+                width: 10,
+                height: 20,
+                points: 50
+            },
+            'building': {
+                type: 'building',
+                width: 10,
+                height: 59,
+                points: 50
+            },
+            'choper': {
+                type: 'choper',
+                width: 17,
+                height: 22,
+                points: 50
+            },
+            'spaceship': {
+                type: 'spaceship',
+                width: 22,
+                height: 20,
+                points: 50
             }
         }
-        // createEnemy();
+
+
         function createEnemy(enemy) {
             enemyId++;
             var enemy = enemies[enemy];
-            var enemyYPos = randomIntFromInterval(0, 100 - enemy.height);
             var enemyEl = document.createElement('enemy');
             enemyEl.className = `enemy-${enemyId} ${enemy.type}`;
             enemyEl.setAttribute('data-type', enemy.type);
+            var enemyYPos = 0;
+            switch (enemy.type) {
+                case 'house':
+                    enemyYPos = 100 - enemy.height;
+                    break;
+                case 'building':
+                    enemyYPos = 100 - enemy.height;
+                    break;
+                case 'choper':
+                    enemyYPos = randomIntFromInterval(0, 16);
+                    break;
+                default:
+                    enemyYPos = randomIntFromInterval(0, 100 - enemy.height);
+            }
+            // var enemyYPos = randomIntFromInterval(0, 100 - enemy.height);
             enemyEl.style.top = enemyYPos + '%';
             game.appendChild(enemyEl);
             enemy.el = enemyEl;
@@ -146,22 +203,35 @@
                 }
                 if (enemyXPos > 70 &&
                     enemyXPos < 80 &&
-                    enemyYPos >= captainPosTop &&
+                    enemyYPos >= captainPosTop - enemyData.height &&
                     enemyYPos <= captainPosTop + 15 &&
                     captain.classList.contains('punch')) {
                     updateScore(enemyData.points)
                     destroyEnemy(enemy)
                     clearInterval(movingEnemy)
                 }
-                // if (enemyXPos === 80 && !captain.classList.contains('punch')) hitCaptain();
+                if (enemyData.type !== 'underpants' &&
+                    // enemyData.type !== 'asteroid' &&
+                    enemyXPos > 80 &&
+                    enemyXPos < 90 &&
+                    enemyYPos >= captainPosTop - enemyData.height &&
+                    enemyYPos <= captainPosTop + 15 &&
+                    !captain.classList.contains('punch')) {
+                    hitCaptain();
+                }
 
                 enemy.style.right = enemyXPos + '%';
 
-            }, randomIntFromInterval(16, 30))
+            }, randomIntFromInterval(...enemySpeedRange))
 
-            // temp
-            // enemy.style.right = '50%';
+            // enemy.style.right = '50%'; // temp
+            
+        }
 
+        // createEnemy('spaceship'); // TEMP
+
+        function hitCaptain() {
+            if(gameContainer.dataset.mode !== 'end') gameEnd();
         }
 
         function removeEnemy(enemy) {
@@ -184,7 +254,7 @@
         // ---------- LEVEL -------------- //
 
         const levelEl = document.querySelector('.level-info .level')
-
+        
         updateLevel()
 
         function updateLevel() {
@@ -209,15 +279,11 @@
             })
 
             function enemyDelay(type) {
-                setTimeout(createEnemy.bind(null, type), randomIntFromInterval(1000, levelTime));
+                setTimeout(createEnemy.bind(null, type), randomIntFromInterval(1000, levelTime - (enemySpeedRange[1] * 100)));
             }
         }
 
         // Timer
-
-
-
-
 
         function resetTimer() {
             seconds = 0;

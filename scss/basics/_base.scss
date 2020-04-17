@@ -1,7 +1,7 @@
 
 html {
     font-family: pastel;
-    color: $clr2;
+    color: $clr4;
 }
 
 body {
@@ -9,13 +9,9 @@ body {
     background-color: $clr6;
 }
 
-h2 {
-    // color: $clr2;
-}
-
 button {
     border: 20px solid;
-    border-image-source: url(/img/crayon-border.png);
+    border-image-source: url(../img/crayon-border.png);
     border-image-slice: 240;
     background-color: $clr4;
     text-transform: uppercase;

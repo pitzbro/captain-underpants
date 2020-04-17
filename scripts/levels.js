@@ -3,7 +3,10 @@ let levels = [
         level: 1,
         mode: 'day',
         enemies: {
-            asteroid: 50,
+            house: 16,
+            choper: 6,
+            building: 8,
+            asteroid: 25,
             underpants: 3 
         }
     },
@@ -12,8 +15,18 @@ let levels = [
         level: 2,
         mode: 'space',
         enemies: {
-            asteroid: 90,
-            underpants: 5 
+            asteroid: 45,
+            underpants: 5,
+            spaceship: 20,
+        }
+    },
+
+    {
+        level: 3,
+        mode: 'deep-space',
+        enemies: {
+            asteroid: 250,
+            underpants: 20,
         }
     },
 

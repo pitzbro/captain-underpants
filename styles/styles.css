@@ -2,19 +2,19 @@
 /* Media  Mixins */
 @font-face {
   font-family: "cabin";
-  src: url("/fonts/cabin/CabinSketch-Regular.ttf"); }
+  src: url("../fonts/cabin/CabinSketch-Regular.ttf"); }
 
 @font-face {
   font-family: "dk";
-  src: url("/fonts/dk/dk.ttf"); }
+  src: url("../fonts/dk/dk.ttf"); }
 
 @font-face {
   font-family: "eraser";
-  src: url("/fonts/eraser/EraserRegular.ttf"); }
+  src: url("../fonts/eraser/EraserRegular.ttf"); }
 
 @font-face {
   font-family: "pastel";
-  src: url("/fonts/pastel/pastel.woff"); }
+  src: url("../fonts/pastel/pastel.woff"); }
 
 body {
   display: grid;
@@ -27,9 +27,11 @@ body {
     grid-row: 3;
     position: relative;
     border: 30px solid;
-    border-image-source: url(/img/crayon-border.png);
+    border-image-source: url(../img/crayon-border.png);
     border-image-slice: 140;
     transition: background-color .8s; }
+    body .game-container .game {
+      cursor: none; }
     body .game-container[data-mode='day'] {
       background-color: #b0bfe0; }
     body .game-container[data-mode='space'] {
@@ -54,13 +56,13 @@ body {
       align-items: flex-start;
       justify-content: flex-end; }
   body .game-start {
-    background-image: url(/img/happy-captain.png);
+    background-image: url(../img/happy-captain.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 16%;
     transform: translateY(100%); }
   body .game-end {
-    background-image: url(/img/happy-captain.png);
+    background-image: url(../img/happy-captain.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 16%;
@@ -76,14 +78,14 @@ body {
     background-color: #fff;
     color: #916ab9;
     border: 30px solid;
-    border-image-source: url(/img/crayon-border.png);
+    border-image-source: url(../img/crayon-border.png);
     border-image-slice: 140;
     transition: all .8s;
     transform: translateY(-100%);
     opacity: 0; }
     body .game-info .stop-watch {
       border: 20px solid;
-      border-image-source: url(/img/crayon-border.png);
+      border-image-source: url(../img/crayon-border.png);
       border-image-slice: 240;
       background: white;
       font-size: 44px;
@@ -99,11 +101,12 @@ body {
     grid-column: 2;
     grid-row: 4;
     display: flex;
-    justify-content: flex-end; }
+    justify-content: flex-end;
+    font-size: 28px; }
 
 html {
   font-family: pastel;
-  color: #293540; }
+  color: #916ab9; }
 
 body {
   margin: 0;
@@ -111,7 +114,7 @@ body {
 
 button {
   border: 20px solid;
-  border-image-source: url(/img/crayon-border.png);
+  border-image-source: url(../img/crayon-border.png);
   border-image-slice: 240;
   background-color: #916ab9;
   text-transform: uppercase;
@@ -142,12 +145,13 @@ button {
     object-fit: cover; }
 
 .message {
-  border: 30px solid;
-  border-image-source: url(/img/crayon-border-white.png);
+  border: 40px solid;
+  border-image-source: url(../img/crayon-border-white.png);
   border-image-slice: 140;
   color: #916ab9;
   font-size: 24px;
-  position: relative; }
+  position: relative;
+  max-width: 40ch; }
   .message::before {
     content: "";
     display: block;
@@ -186,10 +190,27 @@ enemy {
   enemy.asteroid {
     width: 12%;
     height: 12%;
-    background-image: url(/img/asteroid.png); }
+    background-image: url(../img/asteroid.png); }
   enemy.underpants {
     width: 10%;
     height: 10%;
-    background-image: url(/img/underpants.png); }
+    background-image: url(../img/underpants.png); }
+  enemy.house {
+    width: 10%;
+    height: 20%;
+    background-image: url(../img/house.png);
+    z-index: 20; }
+  enemy.building {
+    width: 10%;
+    height: 59%;
+    background-image: url(../img/building.png); }
+  enemy.choper {
+    width: 17%;
+    height: 22%;
+    background-image: url(../img/choper.png); }
+  enemy.spaceship {
+    width: 22%;
+    height: 20%;
+    background-image: url(../img/spaceship.png); }
   enemy.boom {
-    background-image: url(/img/boom.png); }
+    background-image: url(../img/boom.png); }

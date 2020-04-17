@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Captain Underpants - With Internet Game</title>
-    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="./styles/styles.css">
 </head>
 <body>
 
@@ -32,8 +32,15 @@
                 <h2>The END</h2>
                 <div class="score-info">
                     <div class="best-score">
-                        <h3 class="best-score">Congratulations!</h3>
+                        <h3>Congratulations!</h3>
                         you have made a new best score :)
+                    </div>
+                    <div class="not-best-score">
+                        <h3>Not bad!</h3>
+                        <p>
+                        Life is like riding a bicycle, to keep your balance, you must keep moving.
+                        </p>
+                        Albert Einstein
                     </div>
                     <p>
                         Your score: <span class="your-score score">1999</span>
@@ -44,13 +51,17 @@
         </section>
     </section>
     
-    <!-- <section class="game-actions">
-        <button class="btn-restart" onclick="window.location.reload();">Restart</button>
-    </section> -->
+    <section class="game-actions">
 
-    <script src="/scripts/sounds.js"></script>
-    <script src="/scripts/helpers.js"></script>
-    <script src="/scripts/levels.js"></script>
-    <script src="/scripts/main.js"></script>
+        <p>
+            Best score: <span class="best-score"></span>
+        </p>
+        <!-- <button class="btn-restart" onclick="window.location.reload();">Restart</button> -->
+    </section>
+
+    <script src="./scripts/sounds.js"></script>
+    <script src="./scripts/helpers.js"></script>
+    <script src="./scripts/levels.js"></script>
+    <script src="./scripts/main.js"></script>
 </body>
 </html>

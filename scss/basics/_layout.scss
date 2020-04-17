@@ -16,6 +16,10 @@ body {
         @include crayon-border;
 
         transition: background-color .8s;
+
+        .game {
+            cursor: none;
+        }
         
         &[data-mode='day'] {
             background-color: $clr3;
@@ -60,7 +64,7 @@ body {
     }
 
     .game-start {
-        background-image: url(/img/happy-captain.png);
+        background-image: url(../img/happy-captain.png);
         background-repeat: no-repeat;
         background-size: contain;
         background-position: 16%;
@@ -68,7 +72,7 @@ body {
     }
 
     .game-end {
-        background-image: url(/img/happy-captain.png);
+        background-image: url(../img/happy-captain.png);
         background-repeat: no-repeat;
         background-size: contain;
         background-position: 16%;
@@ -94,7 +98,7 @@ body {
 
         .stop-watch {
             border: 20px solid;
-            border-image-source: url(/img/crayon-border.png);
+            border-image-source: url(../img/crayon-border.png);
             border-image-slice: 240;
             background: white;
             font-size: 44px;
@@ -118,5 +122,6 @@ body {
         grid-row: 4;
         display: flex;
         justify-content: flex-end;
+        font-size: 28px;
     }
 }

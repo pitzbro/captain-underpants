@@ -1,8 +1,4 @@
 enemy {
-  // width: 30px;
-  // height: 30px;
-  // background: green;
-
   position: absolute;
   top: 0;
   right: 0;
@@ -13,16 +9,41 @@ enemy {
   &.asteroid {
     width: 12%;
     height: 12%;
-    background-image: url(/img/asteroid.png);
+    background-image: url(../img/asteroid.png);
   }
 
   &.underpants {
     width: 10%;
     height: 10%;
-    background-image: url(/img/underpants.png);
+    background-image: url(../img/underpants.png);
+  }
+
+  &.house {
+    width: 10%;
+    height: 20%;
+    background-image: url(../img/house.png);
+    z-index: 20;
+  }
+
+  &.building {
+    width: 10%;
+    height: 59%;
+    background-image: url(../img/building.png);
+  }
+
+  &.choper {
+    width: 17%;
+    height: 22%;
+    background-image: url(../img/choper.png);
+  }
+
+  &.spaceship {
+    width: 22%;
+    height: 20%;
+    background-image: url(../img/spaceship.png);
   }
 
   &.boom {
-    background-image: url(/img/boom.png);
+    background-image: url(../img/boom.png);
   }
 }
